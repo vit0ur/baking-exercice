@@ -33,14 +33,14 @@ public class CartaoCreditoEntity {
         return cartaoCreditoEntity;
     }
 
-    public static List<CartaoCredito> convertListDomainEntity (List<CartaoCreditoEntity> cartaoCreditoEntityList){
+    public static List<CartaoCredito> convertListCartaoDomainEntity(List<CartaoCreditoEntity> cartaoCreditoEntityList){
         List<CartaoCredito> cartaoCreditoList = new ArrayList<>();
         cartaoCreditoEntityList.forEach(cartaoCreditoEntity -> cartaoCreditoList.add(cartaoCreditoEntity.toDomain()));
 
         return cartaoCreditoList;
     }
 
-    public static  List<CartaoCreditoEntity> convertListEntityDomain (List<CartaoCredito> cartaoCreditoList){
+    public static  List<CartaoCreditoEntity> convertListCartaoEntityDomain(List<CartaoCredito> cartaoCreditoList){
         List<CartaoCreditoEntity> cartaoCreditoEntityList = new ArrayList<>();
         cartaoCreditoList.forEach(cartaoCredito -> cartaoCreditoEntityList.add(fromDomain(cartaoCredito)));
 

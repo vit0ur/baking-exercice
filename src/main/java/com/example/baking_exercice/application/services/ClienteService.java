@@ -33,4 +33,8 @@ public class ClienteService {
     public void deletarCliente(Long id){
         clienteRepositoryPort.deletarPorId(id);
     }
+
+    public List<Cliente> listarClientesComLimiteTotalMaiorQue(Double limite) {
+        return clienteRepositoryPort.findClientesComLimiteTotalMaiorQue(limite);
+    }
 }

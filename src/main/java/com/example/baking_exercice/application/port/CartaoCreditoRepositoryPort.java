@@ -8,5 +8,6 @@ public interface CartaoCreditoRepositoryPort {
     CartaoCredito salvar(CartaoCredito cartaoCredito);
     Optional<CartaoCredito> buscarPorId(Long id);
     List<CartaoCredito> buscarTodos();
+    List<CartaoCredito> listarPorCliente(Long idCliente);
     void deletarPorId(Long id);
 }

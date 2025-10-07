@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import static com.example.baking_exercice.infra.entities.ClienteEntity.convertListClientEntityDomain;
 
 @Repository
 public class ClienteRepositoryAdapter implements ClienteRepositoryPort {
@@ -30,6 +31,11 @@ public class ClienteRepositoryAdapter implements ClienteRepositoryPort {
     @Override
     public List<Cliente> buscarTodos() {
         return clienteJpaRepository.findAll().stream().map(ClienteEntity::toDomain).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Cliente> findClientesComLimiteTotalMaiorQue(Double limiteMinimo) {
+        return convertListClientEntityDomain(clienteJpaRepository.findClientesComLimiteTotalMaiorQue(limiteMinimo));
     }
 
     @Override

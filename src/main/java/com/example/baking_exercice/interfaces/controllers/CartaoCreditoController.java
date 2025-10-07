@@ -16,6 +16,7 @@ public class CartaoCreditoController {
     public CartaoCreditoController(CartaoCreditoService cartaoCreditoService) {
         this.cartaoCreditoService = cartaoCreditoService;
     }
+
     @GetMapping
     public ResponseEntity<List<CartaoCredito>> listar(){
         return ResponseEntity.ok(cartaoCreditoService.listarTodos());
@@ -24,6 +25,12 @@ public class CartaoCreditoController {
     @GetMapping("/{id}")
     public ResponseEntity<CartaoCredito> buscarPorId(@PathVariable Long id){
         return ResponseEntity.ok(cartaoCreditoService.buscarPorId(id));
+    }
+
+    @GetMapping("/cliente/{idCliente}")
+    public ResponseEntity<List<CartaoCredito>> listarPorCliente(@PathVariable Long idCliente) {
+        List<CartaoCredito> cartoes = cartaoCreditoService.listarPorCliente(idCliente);
+        return ResponseEntity.ok(cartoes);
     }
 
     @PostMapping

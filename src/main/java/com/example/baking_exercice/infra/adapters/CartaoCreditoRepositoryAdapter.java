@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import static com.example.baking_exercice.infra.entities.CartaoCreditoEntity.convertListCartaoDomainEntity;
 
 @Repository
 public class CartaoCreditoRepositoryAdapter implements CartaoCreditoRepositoryPort {
@@ -31,6 +32,11 @@ public class CartaoCreditoRepositoryAdapter implements CartaoCreditoRepositoryPo
     @Override
     public List<CartaoCredito> buscarTodos() {
         return cartaoCreditoJpaRepository.findAll().stream().map(CartaoCreditoEntity::toDomain).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CartaoCredito> listarPorCliente(Long idCliente) {
+        return convertListCartaoDomainEntity(cartaoCreditoJpaRepository.findByClienteId(idCliente));
     }
 
     @Override

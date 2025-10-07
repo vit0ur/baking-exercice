@@ -8,5 +8,6 @@ public interface ClienteRepositoryPort {
     Cliente salvar(Cliente cliente);
     Optional<Cliente> buscarPorId(Long id);
     List<Cliente> buscarTodos();
+    List<Cliente> findClientesComLimiteTotalMaiorQue(Double limiteMinimo);
     void deletarPorId(Long id);
 }

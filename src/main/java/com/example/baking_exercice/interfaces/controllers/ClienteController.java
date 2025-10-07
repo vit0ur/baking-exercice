@@ -46,4 +46,11 @@ public class ClienteController {
         clienteService.deletarCliente(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/limite-maior-que")
+    public ResponseEntity<List<Cliente>> getClientesComLimiteMaiorQue(@RequestParam Double limite) {
+        List<Cliente> clientes = clienteService.listarClientesComLimiteTotalMaiorQue(limite);
+        return ResponseEntity.ok(clientes);
+    }
+
 }

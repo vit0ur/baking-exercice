@@ -32,4 +32,8 @@ public class CartaoCreditoService {
     public void deletarCartaoCredito(Long id){
         cartaoCreditoRepositoryPort.deletarPorId(id);
     }
+
+    public List<CartaoCredito> listarPorCliente(Long idCliente) {
+        return cartaoCreditoRepositoryPort.listarPorCliente(idCliente);
+    }
 }
