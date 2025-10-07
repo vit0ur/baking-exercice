@@ -1,19 +1,29 @@
 package com.example.baking_exercice.application.services;
 
 import com.example.baking_exercice.application.port.CartaoCreditoRepositoryPort;
+import com.example.baking_exercice.application.port.ClienteRepositoryPort;
 import com.example.baking_exercice.domain.CartaoCredito;
+import com.example.baking_exercice.domain.Cliente;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
 public class CartaoCreditoService {
     private final CartaoCreditoRepositoryPort cartaoCreditoRepositoryPort;
+    private final ClienteRepositoryPort clienteRepositoryPort;
 
-    public CartaoCreditoService(CartaoCreditoRepositoryPort cartaoCreditoRepositoryPort) {
+    public CartaoCreditoService(CartaoCreditoRepositoryPort cartaoCreditoRepositoryPort, ClienteRepositoryPort clienteRepositoryPort) {
         this.cartaoCreditoRepositoryPort = cartaoCreditoRepositoryPort;
+        this.clienteRepositoryPort = clienteRepositoryPort;
     }
 
     public CartaoCredito cadastrarCartaoCredito(CartaoCredito cartaoCredito){
+
+        Long idCliente = cartaoCredito.getCliente().getId();
+        Cliente cliente = clienteRepositoryPort.buscarPorId(idCliente).orElseThrow(() -> new IllegalArgumentException("Cliente não encontrado com ID: " + idCliente));
+
+        cartaoCredito.setCliente(cliente);
+
         return cartaoCreditoRepositoryPort.salvar(cartaoCredito);
     }
 

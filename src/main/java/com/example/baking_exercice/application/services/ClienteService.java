@@ -1,6 +1,8 @@
 package com.example.baking_exercice.application.services;
 
+import com.example.baking_exercice.application.port.CartaoCreditoRepositoryPort;
 import com.example.baking_exercice.application.port.ClienteRepositoryPort;
+import com.example.baking_exercice.domain.CartaoCredito;
 import com.example.baking_exercice.domain.Cliente;
 import com.example.baking_exercice.exceptions.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
@@ -9,9 +11,11 @@ import java.util.List;
 @Service
 public class ClienteService {
     private final ClienteRepositoryPort clienteRepositoryPort;
+    private final CartaoCreditoRepositoryPort cartaoCreditoRepositoryPort;
 
-    public ClienteService(ClienteRepositoryPort clienteRepositoryPort) {
+    public ClienteService(ClienteRepositoryPort clienteRepositoryPort, CartaoCreditoRepositoryPort cartaoCreditoRepositoryPort) {
         this.clienteRepositoryPort = clienteRepositoryPort;
+        this.cartaoCreditoRepositoryPort = cartaoCreditoRepositoryPort;
     }
 
     public Cliente cadastrarCliente(Cliente cliente){
@@ -31,6 +35,12 @@ public class ClienteService {
     }
 
     public void deletarCliente(Long id){
+        List<CartaoCredito> cartaoCreditoList = cartaoCreditoRepositoryPort.listarPorCliente(id);
+
+        if (!cartaoCreditoList.isEmpty()) {
+            throw new IllegalStateException("Não é possível deletar o cliente. Existem cartões associados.");
+        }
+
         clienteRepositoryPort.deletarPorId(id);
     }
 
