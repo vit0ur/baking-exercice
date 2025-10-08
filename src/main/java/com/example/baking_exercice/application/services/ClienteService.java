@@ -5,6 +5,7 @@ import com.example.baking_exercice.application.port.ClienteRepositoryPort;
 import com.example.baking_exercice.domain.CartaoCredito;
 import com.example.baking_exercice.domain.Cliente;
 import com.example.baking_exercice.exceptions.ResourceNotFoundException;
+import com.example.baking_exercice.interfaces.dtos.ClienteResponseDTO;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -46,5 +47,9 @@ public class ClienteService {
 
     public List<Cliente> listarClientesComLimiteTotalMaiorQue(Double limite) {
         return clienteRepositoryPort.findClientesComLimiteTotalMaiorQue(limite);
+    }
+
+    public static ClienteResponseDTO toResponseDTO(Cliente cliente) {
+        return new ClienteResponseDTO(cliente.getNome(), cliente.getEmail(), cliente.getCartoes());
     }
 }

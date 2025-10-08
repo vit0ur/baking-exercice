@@ -4,6 +4,7 @@ import com.example.baking_exercice.application.port.CartaoCreditoRepositoryPort;
 import com.example.baking_exercice.application.port.ClienteRepositoryPort;
 import com.example.baking_exercice.domain.CartaoCredito;
 import com.example.baking_exercice.domain.Cliente;
+import com.example.baking_exercice.interfaces.dtos.CartaoCreditoResponseDTO;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -45,5 +46,9 @@ public class CartaoCreditoService {
 
     public List<CartaoCredito> listarPorCliente(Long idCliente) {
         return cartaoCreditoRepositoryPort.listarPorCliente(idCliente);
+    }
+
+    public static CartaoCreditoResponseDTO toResponseDTO(CartaoCredito cartao) {
+        return new CartaoCreditoResponseDTO(cartao.getNumero(), cartao.getLimite(), cartao.getCliente());
     }
 }
